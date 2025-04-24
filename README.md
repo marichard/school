@@ -1,2 +1,2 @@
-# school
-Learning advanced SQL
+# School
+Analysis of school performance.
