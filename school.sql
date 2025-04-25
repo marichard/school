@@ -1,46 +1,14 @@
--- Review basic's section
--- view students table
+/* Multiple table analysis
+ Problem: discrepancy between the orders and products tables in the database.
+Task: Use a join to figure out which products exist in one table but not the other.
+   */
 SELECT
-    *
-FROM students;
+    p.product_id,
+    p.product_name,
+    o.product_id AS orders_product_id
+FROM products p
+LEFT JOIN orders o
+    ON p.product_id = o.product_id
+WHERE o.product_id IS NULL;
 
--- the big 6
-SELECT
-    grade_level,
-    ROUND(AVG(gpa), 2) AS avg_gpa
-FROM students
-WHERE school_lunch = 'Yes'
-GROUP BY grade_level
-HAVING ROUND(AVG(gpa), 2) < 3.3
-ORDER BY grade_level;
--- common keywords
-
--- distinct
-SELECT DISTINCT
-    grade_level
-FROM students;
--- count
-SELECT
-    COUNT(DISTINCT grade_level)
-FROM students;
--- MAX and MIN
-SELECT
-    MAX(gpa),
-    MIN(gpa)
-FROM students;
-
--- gpa range
-SELECT
-    MAX(gpa) - MIN(gpa) AS gpa_range
-FROM students;
--- AND
-SELECT
-    *
-FROM students
-WHERE grade_level < 12 AND school_lunch = 'Yes';
-
--- in
-
--- is null
-
--- like
+-- Solution: products shown haven't been ordered yet
